@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "conexion.php";
+include "../config/conexion.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -26,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = $user['role'];
 
             if ($user['role'] === 'Administrador') {
-                $_SESSION['rol'] = 'admin';
+                $_SESSION['role'] = 'admin';
                 header("Location: dashboard-admin.php");
             } else {
-                $_SESSION['rol'] = 'estudiante';
+                $_SESSION['role'] = 'estudiante';
                 header("Location: dashboard-student.php");
             }
             exit();

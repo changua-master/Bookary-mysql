@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookary - Tu Biblioteca</title>
+    <link rel="stylesheet" href="bookary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sidebar (Menú Lateral) -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menú</h3>
+            <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link active"><i class="fas fa-home"></i> Inicio</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class="fas fa-book"></i> Libros</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class="fas fa-book-reader"></i> Préstamos</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class="fas fa-users"></i> Usuarios</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Navbar (Barra de Navegación Superior) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <button class="toggle-sidebar" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+                <a href="index.html" class="navbar-brand">Book<span>ary</span></a>
+                <ul class="navbar-nav">
+                    <li><a href="cerrar.php">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal de la Página -->
+    <main class="main-content" id="mainContent">
+        <div class="container section">
+            <h1 class="welcome-title">Título de la Página</h1>
+            <p class="welcome-subtitle">Este es un contenedor principal que se puede adaptar para cualquier contenido.</p>
+            
+            <!-- Aquí iría el contenido específico de la página -->
+            <div class="card">
+                <h2 class="card-title">Contenido de Ejemplo</h2>
+                <p class="card-text">Puedes colocar tablas, formularios, texto y más dentro de este contenedor.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Pie de Página) -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Bookary. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="sidebar.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
