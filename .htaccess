@@ -1,0 +1,28 @@
+DirectoryIndex index.html
+
+# Redireccionar solicitudes a la página principal
+RewriteEngine On
+RewriteBase /Bookary/
+
+# No aplicar reglas a archivos y directorios existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redireccionar a index.html por defecto
+RewriteRule ^$ index.html [L]
+
+# Proteger archivos sensibles
+<FilesMatch "^(conexion\.php|\.htaccess)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Configuración de seguridad básica
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

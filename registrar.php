@@ -17,59 +17,49 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylelogin.css">
-    <link rel="stylesheet" href="styles.css">
-    <title>Bookary - Registro de Usuarios</title>
-    
+    <title>Registro - Bookary</title>
+    <!-- CAMBIAR: CSS unificado -->
+    <link rel="stylesheet" href="bookary.css">
 </head>
 <body>
-    <?php
-            session_start();
-            if (isset($_SESSION['mensaje'])) {
-                echo $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
-            }
-            ?>
-    <div class="container">
-        <div class="header">
-            <div class="logo">B</div>
-            <h1>Bookary</h1>
-            <p>Únete a nuestra comunidad literaria</p>
+    <!-- CAMBIAR: Mostrar mensajes si existen -->
+    <?php if (isset($_SESSION['mensaje'])) { ?>
+        <div class="alert alert-info">
+            <?php echo $_SESSION['mensaje']; unset($_SESSION['mensaje']); ?>
         </div>
+    <?php } ?>
 
-        <div class="form-container">
-            <form method="POST" action="registrar.php">
-                <div class="input-group">
-                    <label for="username">Nombre de usuario</label>
-                    <input type="text" id="username" name="username" required placeholder="Ingresa tu nombre de usuario">
+    <!-- CAMBIAR: Estructura del formulario -->
+    <div class="auth-page">
+        <div class="auth-container">
+            <form class="auth-form" method="POST" action="registrar.php">
+                <div class="form-header">
+                    <div class="navbar-brand">Book<span>ary</span></div>
+                    <h1 class="auth-title">Crear Cuenta</h1>
+                    <p class="form-subtitle">Únete a nuestra comunidad literaria</p>
                 </div>
 
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required placeholder="Crea una contraseña segura">
+                <div class="form-group">
+                    <label class="form-label" for="username">Nombre de Usuario</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Ingresa tu nombre de usuario" required>
                 </div>
 
-                <button type="submit" class="btn-register">Crear Cuenta</button>
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Crea una contraseña segura" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full btn-lg">
+                    <i class="fas fa-user-plus"></i> Crear Cuenta
+                </button>
+
+                <div class="auth-links">
+                    <a href="login.html">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
             </form>
-
-           
         </div>
     </div>
-    <footer>
-    <div class="footer-content">
-      <div class="footer-logo">
-        <a href="#">BibliotecaVirtual</a>
-        <p>©️ 2025 Todos los derechos reservados.</p>
-      </div>
-      <div class="footer-links">
-        <a href="#">Términos</a>
-        <a href="#">Privacidad</a>
-        <a href="#">FAQ</a>
-      </div>
-    </div>
-  </footer>
-</body> 
-
+</body>
 </html>
 <?php
 session_start();
@@ -81,8 +71,8 @@ $pass = "";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
-    $_SESSION['mensaje'] = '<div class="message error">Conexión fallida: ' . $conn->connect_error .'</div>'; 
-    header("Location: signup.html");
+    $_SESSION['mensaje'] = '<div class="message error">Error de conexión: ' . $conn->connect_error .'</div>'; 
+    header("Location: registrar.php");
     exit();
 }
 
@@ -99,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->num_rows > 0) {
         $_SESSION['mensaje'] = '<div class="message error">El usuario <b>' . htmlspecialchars($username) . '</b> ya existe.</div>';
-        header("Location: signup.html");
+        header("Location: registrar.php");
         exit();
     }
 
@@ -119,16 +109,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['mensaje'] = '<div class="message error">Error al crear la cuenta. Inténtalo de nuevo.</div>';
     }
 
-    $stmt->close();
+        $stmt->close();
 }
 
 $conn->close();
-header("Location: login.php");
-exit();
 ?>
-
-            <div class="footer">
-                <p>&copy; 2023 Bookary. Todos los derechos reservados.</p>
 
 
 

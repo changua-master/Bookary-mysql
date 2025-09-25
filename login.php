@@ -26,9 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = $user['role'];
 
             if ($user['role'] === 'Administrador') {
-                header("Location: admin.php");
+                $_SESSION['rol'] = 'admin';
+                header("Location: dashboard-admin.php");
             } else {
-                header("Location: main.html");
+                $_SESSION['rol'] = 'estudiante';
+                header("Location: dashboard-student.php");
             }
             exit();
         } else {

@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     exit();
 }
 
-include "conexion.php";
+include "../config/conexion.php";
 
 
 // 2. Lógica para obtener los datos de la base de datos
@@ -26,8 +26,7 @@ if ($resultado === false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración - Bookary</title>
     <!-- Estilos -->
-    <link rel="stylesheet" href="bookary.css">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../assets/css/bookary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -67,11 +66,7 @@ if ($resultado === false) {
                     <i class="fas fa-chart-bar"></i> Reportes
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a href="configuracion.php" class="sidebar-link">
-                    <i class="fas fa-cog"></i> Configuración
-                </a>
-            </li>
+
         </ul>
     </div>
     <!-- Overlay para el sidebar -->
@@ -80,38 +75,29 @@ if ($resultado === false) {
     <nav class="navbar">
         <div class="container">
             <div class="navbar-content">
-                <button class="toggle-sidebar" id="toggleSidebar">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <a href="#" class="navbar-brand">Book<span>ary</span></a>
+                <div class="navbar-left">
+                    <button class="toggle-sidebar" id="toggleSidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a href="#" class="navbar-brand">Book<span>ary</span></a>
+                </div>
                 <div class="navbar-right">
-                    <ul class="navbar-nav">
-                        <li class="dropdown">
+                    <div class="user-menu">
+                        <a href="perfil.php" class="nav-link">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                        <a href="usuarios.php" class="nav-link">
+                            <i class="fas fa-users"></i> Usuarios
+                        </a>
+                        <div class="dropdown">
                             <button class="dropdown-toggle" id="adminMenu">
-                                <i class="fas fa-user-circle"></i>
-                                Administrador
-                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-user-circle"></i> Administrador
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="adminMenu">
-                                <a href="perfil.php" class="dropdown-item">
-                                    <i class="fas fa-user"></i> Mi Perfil
-                                </a>
-                                <a href="configuracion.php" class="dropdown-item">
-                                    <i class="fas fa-cog"></i> Configuración
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="prestamos.php" class="dropdown-item">
-                                    <i class="fas fa-book-reader"></i> Préstamos
-                                </a>
-                                <a href="usuarios.php" class="dropdown-item">
-                                    <i class="fas fa-users"></i> Usuarios
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="cerrar.php" class="btn btn-error btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                    </a>
+                        </div>
+                        <a href="cerrar.php" class="nav-link logout-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,32 +111,31 @@ if ($resultado === false) {
                 <a href="agregar_libro.php" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Agregar Libro
                 </a>
-                <a href="reportes.php" class="btn btn-secondary">
+                <a href="reportes.php" class="btn btn-outline">
                     <i class="fas fa-chart-bar"></i> Reportes
                 </a>
             </div>
         </div>
 
         <!-- Estadísticas -->
-        <div class="admin-stats">
-            <div class="stats-grid mb-8">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
-                    <span class="stat-number">1,250</span>
-                    <span class="stat-label">Total Libros</span>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <span class="stat-number">856</span>
-                    <span class="stat-label">Usuarios</span>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="stat-number">124</span>
-                    <span class="stat-label">Préstamos Activos</span>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">Disponibilidad</span>
-                </div>
+        <div class="stats-summary">
+            <div class="stat-item">
+                <span class="stat-value">1,250</span>
+                <span class="stat-label">Total Libros</span>
             </div>
+            <div class="stat-item">
+                <span class="stat-value">856</span>
+                <span class="stat-label">Usuarios</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">124</span>
+                <span class="stat-label">Préstamos Activos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">98%</span>
+                <span class="stat-label">Disponibilidad</span>
+            </div>
+        </div>
             <div class="chart-container">
                 <canvas id="statsChart"></canvas>
             </div>

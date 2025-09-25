@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     exit();
 }
 
-include "conexion.php";
+include "../config/conexion.php";
 
 
 // 2. Lógica para obtener los datos de la base de datos
@@ -26,8 +26,7 @@ if ($resultado === false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración - Bookary</title>
     <!-- Estilos -->
-    <link rel="stylesheet" href="bookary.css">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../assets/css/bookary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -118,6 +117,20 @@ if ($resultado === false) {
     </nav>
 
     <div class="container section main-content" id="mainContent">
+        
+        <?php if(isset($_SESSION['success_message'])): ?>
+            <div class="alert alert-success">
+                <?php echo $_SESSION['success_message']; ?>
+                <?php unset($_SESSION['success_message']); ?>
+            </div>
+        <?php endif; ?>
+        <?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger">
+                <?php echo $_SESSION['error_message']; ?>
+                <?php unset($_SESSION['error_message']); ?>
+            </div>
+        <?php endif; ?>
+
         <!-- CAMBIAR: Header de administración -->
         <div class="admin-header">
             <h1 class="admin-title">Panel de Administración</h1>
@@ -195,7 +208,7 @@ if ($resultado === false) {
         </div>
     </div>
     <!-- Scripts -->
-    <script src="sidebar.js"></script>
+    <script src="assets/js/sidebar.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables -->
@@ -210,7 +223,7 @@ if ($resultado === false) {
     <!-- anime.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <!-- Dashboard Script -->
-    <script src="dashboard.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
 <?php
