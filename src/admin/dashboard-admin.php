@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
-    header('Location: login.php');
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    header('Location: index.html');
     exit();
 }
 ?>
@@ -10,43 +10,48 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Estudiante - Bookary</title>
-    <link rel="stylesheet" href="../assets/css/bookary.css">
+    <title>Dashboard Administrador - Bookary</title>
+    <link rel="stylesheet" href="../../public/assets/css/bookary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="student-layout">
-    <!-- Sidebar específico para estudiante -->
-    <div class="sidebar student-sidebar" id="sidebar">
+<body class="admin-layout">
+    <!-- Sidebar específico para administrador -->
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>Mi Biblioteca</h3>
+            <h3>Panel Administrativo</h3>
             <button class="sidebar-close" id="closeSidebar">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <ul class="sidebar-menu">
             <li class="sidebar-item">
-                <a href="dashboard-student.php" class="sidebar-link active">
+                <a href="dashboard-admin.php" class="sidebar-link active">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="catalogo.php" class="sidebar-link">
-                    <i class="fas fa-books"></i> Catálogo
+                <a href="admin.php" class="sidebar-link">
+                    <i class="fas fa-book"></i> Gestión de Libros
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="mis-prestamos.php" class="sidebar-link">
-                    <i class="fas fa-book-reader"></i> Mis Préstamos
+                <a href="prestamos.php" class="sidebar-link">
+                    <i class="fas fa-book-reader"></i> Préstamos
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="favoritos.php" class="sidebar-link">
-                    <i class="fas fa-heart"></i> Mis Favoritos
+                <a href="usuarios.php" class="sidebar-link">
+                    <i class="fas fa-users"></i> Usuarios
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="historial.php" class="sidebar-link">
-                    <i class="fas fa-history"></i> Historial
+                <a href="reportes.php" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i> Reportes
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="configuracion.php" class="sidebar-link">
+                    <i class="fas fa-cog"></i> Configuración
                 </a>
             </li>
         </ul>
@@ -55,7 +60,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Navbar -->
-    <nav class="navbar student-navbar">
+    <nav class="navbar">
         <div class="container">
             <div class="navbar-content">
                 <button class="toggle-sidebar" id="toggleSidebar">
@@ -64,13 +69,13 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
                 <a href="#" class="navbar-brand">Book<span>ary</span></a>
                 <ul class="navbar-nav">
                     <li class="dropdown">
-                        <button class="dropdown-toggle" id="studentMenu">
+                        <button class="dropdown-toggle" id="adminMenu">
                             <i class="fas fa-user-circle"></i>
-                            Estudiante
+                            Administrador
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="studentMenu">
-                            <a href="perfil-estudiante.php" class="dropdown-item">
+                        <div class="dropdown-menu" aria-labelledby="adminMenu">
+                            <a href="perfil.php" class="dropdown-item">
                                 <i class="fas fa-user"></i> Mi Perfil
                             </a>
                             <div class="dropdown-divider"></div>
@@ -86,44 +91,45 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
 
     <div class="container section main-content" id="mainContent">
         <div class="welcome-section">
-            <h1 class="welcome-title">Bienvenido a tu Biblioteca Personal</h1>
-            <p class="welcome-subtitle">Explora nuestro catálogo y gestiona tus préstamos</p>
+            <h1 class="welcome-title">Bienvenido al Panel de Administración</h1>
+            <p class="welcome-subtitle">Selecciona una de las opciones para comenzar</p>
         </div>
 
         <div class="dashboard-grid">
-            <a href="catalogo.php" class="dashboard-card student-card">
+            <a href="admin.php" class="dashboard-card">
                 <div class="card-icon">
-                    <i class="fas fa-books"></i>
+                    <i class="fas fa-book"></i>
                 </div>
-                <h3>Explorar Catálogo</h3>
-                <p>Descubre nuevos libros</p>
+                <h3>Gestión de Libros</h3>
+                <p>Administra el catálogo de libros</p>
             </a>
-            <a href="mis-prestamos.php" class="dashboard-card student-card">
+            <a href="prestamos.php" class="dashboard-card">
                 <div class="card-icon">
                     <i class="fas fa-book-reader"></i>
                 </div>
-                <h3>Mis Préstamos</h3>
-                <p>Gestiona tus libros prestados</p>
+                <h3>Préstamos</h3>
+                <p>Gestiona los préstamos activos</p>
             </a>
-            <a href="favoritos.php" class="dashboard-card student-card">
+            <a href="usuarios.php" class="dashboard-card">
                 <div class="card-icon">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-users"></i>
                 </div>
-                <h3>Favoritos</h3>
-                <p>Tus libros guardados</p>
+                <h3>Usuarios</h3>
+                <p>Administra los usuarios del sistema</p>
             </a>
-            <a href="historial.php" class="dashboard-card student-card">
+            <a href="reportes.php" class="dashboard-card">
                 <div class="card-icon">
-                    <i class="fas fa-history"></i>
+                    <i class="fas fa-chart-bar"></i>
                 </div>
-                <h3>Historial</h3>
-                <p>Tu actividad en la biblioteca</p>
+                <h3>Reportes</h3>
+                <p>Visualiza estadísticas y reportes</p>
             </a>
         </div>
     </div>
 
     <!-- Scripts -->
-    <script src="sidebar.js"></script>
-    <script src="dashboard.js"></script>
+    <script src="../../public/assets/js/sidebar.js"></script>
+    <script src="../../public/assets/js/dashboard.js"></script>
+    <script src="../../public/assets/js/admin-dashboard.js"></script>
 </body>
 </html>

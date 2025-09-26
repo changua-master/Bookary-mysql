@@ -11,7 +11,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Estudiante - Bookary</title>
-    <link rel="stylesheet" href="assets/css/bookary.css">
+    <link rel="stylesheet" href="../../public/assets/css/bookary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="student-layout">
@@ -123,7 +123,8 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'estudiante') {
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/sidebar.js"></script>
-    <script src="assets/js/dashboard.js"></script>
+    <script src="../../public/assets/js/sidebar.js"></script>
+    <script src="../../public/assets/js/dashboard.js"></script>
+    <script src="../../public/assets/js/student-dashboard.js"></script>
 </body>
 </html>
